@@ -1,16 +1,38 @@
-import React from "react";
+import { useNavigate, Outlet } from "react-router-dom";
 
-export default function About() {
+const About = () => {
+  const navigate = useNavigate();
+
   return (
-    <section className="section about-section">
-      <h1 className="section-title">about us</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-        repudiandae architecto qui adipisci in officiis, aperiam sequi atque
-        perferendis eos, autem maiores nisi saepe quisquam hic odio consectetur
-        nobis veritatis quasi explicabo obcaecati doloremque? Placeat ratione
-        hic aspernatur error blanditiis?
-      </p>
-    </section>
+    <div className="about-container-main">
+      <div className="about-profile-container">
+        {/* Always show Outlet (profile) */}
+        <Outlet />
+
+        {/* Go Back Button */}
+        <button
+          className="about-profile-button"
+          onClick={() => navigate(-1)}
+          style={{ marginTop: "10px" }}
+        >
+          Go Back
+        </button>
+      </div>
+
+      <div className="about-container">
+        <div className="about-left">
+          <h1>
+            Welcome to <br /> The world of <br />
+            <span>cocktail</span>
+          </h1>
+          <h4>"Better you will feel if you drink cocktail"</h4>
+        </div>
+        <div className="about-right">
+          <img src="/Images/Cocktail.png" alt="cocktail" />
+        </div>
+      </div>
+    </div>
   );
-}
+};
+
+export default About;
