@@ -214,7 +214,7 @@ header {
 .btn {
   background-color: var(--hulu-green);
   color: var(--white);
-  border: none;
+  border: 2px solid red;
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
@@ -370,6 +370,25 @@ button:hover {
 .about-container .about-right img {
   width: 500px;
 }
+.about-profile-button {
+  background-color: var(--hulu-green);
+  color: var(--white);
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: large;
+  font-weight: bold;
+}
+
+.about-profile-button:hover {
+  background-color: var(--dark-orange);
+}
+.about-profile-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
 
 .contact-container {
   display: flex;
@@ -439,7 +458,7 @@ button:hover {
 .contact-container .contact-right form button {
   padding: 10px 20px;
   margin: 10px;
-  background-color: var(--dark-orange);
+  background-color: var(--hulu-green);
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
   color: #ffffff;
   font-size: large;
@@ -449,7 +468,7 @@ button:hover {
 }
 
 .contact-container .contact-right form button:hover {
-  background-color: var(--orange);
+  background-color: var(--hulu-green);
 }
 .nav li span.login-status-dot {
   font-size: 1.5rem;
@@ -560,5 +579,49 @@ button:hover {
     margin: auto;
 
     width: 95%;
+  }
+}
+
+/* CSS for mobile devices */
+
+@media only screen and (max-width: 1150px) {
+  .about-container .about-left h1 {
+    font-size: 50px;
+  }
+
+  .about-container .about-left h4 {
+    font-size: 20px;
+  }
+
+  .about-container .about-right img {
+    width: 380px;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .about-container .about-left h1 {
+    font-size: 45px;
+  }
+
+  .about-container .about-left h4 {
+    font-size: 18px;
+  }
+
+  .about-container .about-right img {
+    width: 330px;
+  }
+  @media only screen and (max-width: 880px) {
+    .search-container .search-input {
+      width: 25rem;
+    }
+
+    .about-container .about-left {
+      margin-bottom: 20px;
+    }
+
+    .error-page img {
+      height: auto;
+      width: 80%;
+    }
   }
 }

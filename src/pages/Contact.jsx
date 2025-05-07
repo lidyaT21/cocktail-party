@@ -17,7 +17,9 @@ const Contact = () => {
           <input type="text" placeholder="Name" required />
           <input type="email" placeholder="Email" required />
           <textarea placeholder="Type your Message here..." required></textarea>
-          <button type="submit">Submit</button>
+          <button type="submit" className="btn">
+            Submit
+          </button>
           {message && <span>Thanks for contacting , We will reply ASAP.</span>}
         </form>
       </div>

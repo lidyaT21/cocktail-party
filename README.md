@@ -1,12 +1,27 @@
-# React + Vite
+# Party Cocktail Drinks App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple cocktail Drinks search app for cocktails. The app will allow users to search for cocktails by name. The app will also allow users to view details about a specific cocktail, such as the ingredients and instructions on how to make it.
 
-Currently, two official plugins are available:
+## Project requirements per HYF
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- The app needs to have multiple pages and use client-side routing;
+  -The app should make use of the Context API or use custom hooks;
+  -You can either use an API that you have built or access to (then just include the backend code in the project) or should use data from a public API You will not be graded on backend code
+  -You should not use class components;
+  -You are not allowed to do a code-along or tutorial for this project, the goal is for you to build something yourself!
 
-## Expanding the ESLint configuration
+## APIs to use
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- https://www.thecocktaildb.com/api.php (free)
+
+## User Stories
+
+- [x] (must have) Featured and Popular cocktails
+- [x] (must have)Responsive Design
+- [x] (must have) User can search drinks by name
+- [x] (must have) User can view details about a specific drink (ingredients, instructions)
+- [x] (must have) User readable error messages
+- [x] (must have) Simple and clean design
+- [x] (Should have) user can goes view contact,About,Favorite drinks
+- [x] (should have) Loading spinner when fetching data
+- [x] (Should have) user can add favorites drinks.
