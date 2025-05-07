@@ -10,6 +10,10 @@ A simple cocktail Drinks search app for cocktails. The app will allow users to s
   -You should not use class components;
   -You are not allowed to do a code-along or tutorial for this project, the goal is for you to build something yourself!
 
+## Deployed link
+
+https://cocktail-party-drink.netlify.app/
+
 ## APIs to use
 
 - https://www.thecocktaildb.com/api.php (free)
