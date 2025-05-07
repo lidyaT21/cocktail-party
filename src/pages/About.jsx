@@ -6,10 +6,8 @@ const About = () => {
   return (
     <div className="about-container-main">
       <div className="about-profile-container">
-        {/* Always show Outlet (profile) */}
         <Outlet />
 
-        {/* Go Back Button */}
         <button
           className="about-profile-button"
           onClick={() => navigate(-1)}

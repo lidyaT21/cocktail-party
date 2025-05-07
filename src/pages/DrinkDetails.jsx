@@ -1,102 +1,74 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
-import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-
-export const DrinkDetails = () => {
+const CocktailDetail = () => {
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
   const [cocktail, setCocktail] = useState(null);
+  const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
-    async function getCocktail() {
+    const fetchCocktailDetail = async () => {
       try {
         const response = await fetch(
           `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
         );
         const data = await response.json();
-        if (data.drinks) {
-          const {
-            strDrink: name,
-            strDrinkThumb: image,
-            strAlcoholic: info,
-            strCategory: category,
-            strGlass: glass,
-            strInstructions: instructions,
-            strIngredient1,
-            strIngredient2,
-            strIngredient3,
-            strIngredient4,
-            strIngredient5,
-          } = data.drinks[0];
-          const ingredients = [
-            strIngredient1,
-            strIngredient2,
-            strIngredient3,
-            strIngredient4,
-            strIngredient5,
-          ];
-          const newCocktail = {
-            name,
-            image,
-            info,
-            category,
-            glass,
-            instructions,
-            ingredients,
-          };
-          setCocktail(newCocktail);
-        } else {
-          setCocktail(null);
+        const drink = data.drinks?.[0];
+        setCocktail(drink);
+
+        const ingredientsList = [];
+        for (let i = 1; i <= 15; i++) {
+          const ingredient = drink[`strIngredient${i}`];
+          const measure = drink[`strMeasure${i}`];
+          if (ingredient) {
+            ingredientsList.push(`${measure || ""} ${ingredient}`.trim());
+          }
         }
+        setIngredients(ingredientsList);
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching cocktail detail:", error);
       }
-      setLoading(false);
-    }
-    getCocktail();
+    };
+
+    fetchCocktailDetail();
   }, [id]);
-  if (loading) {
+
+  if (!cocktail) {
     return <Loading />;
   }
-  if (!cocktail) {
-    return <h2 className="section-title">no cocktail to display</h2>;
-  } else {
-    const { name, image, category, info, glass, instructions, ingredients } =
-      cocktail;
-    return (
-      <section className="cocktail-section">
-        <Link to="/" className="btn btn-primary">
-          back home
-        </Link>
-        <div className="drink">
-          <img src={image} alt={name}></img>
-          <div className="drink-info">
-            <p>
-              <span className="drink-data">name :</span> {name}
-            </p>
-            <p>
-              <span className="drink-data">category :</span> {category}
-            </p>
-            <p>
-              <span className="drink-data">info :</span> {info}
-            </p>
-            <p>
-              <span className="drink-data">glass :</span> {glass}
-            </p>
-            <p>
-              <span className="drink-data">instructons :</span> {instructions}
-            </p>
-            <p>
-              <span className="drink-data">ingredients :</span>
-              {ingredients.map((item, index) => {
-                return item ? <span key={index}> {item}</span> : null;
-              })}
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
+
+  return (
+    <div className="cocktail-detail">
+      <img
+        className="cocktail-img"
+        src={cocktail.strDrinkThumb}
+        alt={cocktail.strDrink}
+      />
+
+      <div className="cocktail-text">
+        <h2 className="cocktail-title">{cocktail.strDrink}</h2>
+        <p className="overview">{cocktail.strInstructions}</p>
+
+        <ul className="cocktail-info-list">
+          <li>
+            <div>{cocktail.strCategory}</div>
+          </li>
+          <li>
+            <div>{cocktail.strGlass}</div>
+          </li>
+        </ul>
+
+        <h3>Ingredients</h3>
+        <ul className="ingredient">
+          {ingredients.map((ingredient, index) => (
+            <li key={index}>
+              <div>{ingredient}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 };
+
+export default CocktailDetail;

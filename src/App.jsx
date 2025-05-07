@@ -1,30 +1,77 @@
+import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+import CardList from "./components/CardList";
+import DrinkDetails from "./pages/DrinkDetails";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import FavoriteList from "./components/FavoriteList";
+
+import useOnline from "./hooks/useOnline";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Error from "./pages/Error";
-import { DrinkDetails } from "./pages/DrinkDetails";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { AppProvider } from "./context/";
-import CocktailSearch from "./components/CoktailSearch";
-import Home from "./pages/Home";
 import "./App.css";
+import UserOffline from "./components/UseOffline";
+import CocktailSearch from "./components/CoktailSearch";
 
-function App() {
+const App = () => {
+  const [favoritelist, setFavoriteList] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
+  const isOnline = useOnline();
+  if (isOnline === false) return <UserOffline />;
+
+  const addToFavoriteList = (cocktail) => {
+    setFavoriteList((prevFavoritelist) => [...prevFavoritelist, cocktail]);
+  };
+
+  const removeFavoriteList = (cocktailId) => {
+    setFavoriteList((prevFavoritelist) =>
+      prevFavoritelist.filter((cocktail) => cocktail.idDrink !== cocktailId)
+    );
+  };
+
+  // Set search results and navigate to search results page
+  const handleSearchResults = (results) => {
+    setSearchResults(results);
+    navigate("/search-results");
+  };
+
   return (
-    <AppProvider>
-      {" "}
-      {/* AppProvider must wrap all components that use the context */}
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="cocktail/:id" element={<DrinkDetails />} />
-          <Route path="/search/:text" element={<CocktailSearch />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </Router>
-    </AppProvider>
+    <div>
+      <Header />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <CardList category="all" addToFavoriteList={addToFavoriteList} />
+          }
+        />
+
+        <Route path="/cocktail/:id" element={<DrinkDetails />} />
+        <Route path="/search-results/:text" element={<CocktailSearch />} />
+
+        <Route
+          path="/favoritelist"
+          element={
+            <FavoriteList
+              favoritelist={favoritelist}
+              addToFavoriteList={addToFavoriteList}
+              onRemoveFavoriteList={removeFavoriteList}
+            />
+          }
+        />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+      <Footer />
+    </div>
   );
-}
+};
 
 export default App;

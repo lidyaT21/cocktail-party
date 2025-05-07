@@ -18,9 +18,7 @@ const Contact = () => {
           <input type="email" placeholder="Email" required />
           <textarea placeholder="Type your Message here..." required></textarea>
           <button type="submit">Submit</button>
-          {message && (
-            <span>Thanks for contacting FoodFire, We will reply ASAP.</span>
-          )}
+          {message && <span>Thanks for contacting , We will reply ASAP.</span>}
         </form>
       </div>
     </div>

@@ -1,16 +1,15 @@
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchForm = () => {
+  const [text, setText] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const input = document.querySelector('input[type="text"]');
-    const text = input.value;
-    input.value = "";
-    input.placeholder = "Search for Drinks";
     if (text.trim() === "") return;
-    navigate(`/search/${text}`);
+    navigate(`/search-results/${text.trim()}`);
+    setText("");
   };
 
   return (
@@ -18,6 +17,8 @@ const SearchForm = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
           placeholder="Search for drinks"
           className="search-input"
         />

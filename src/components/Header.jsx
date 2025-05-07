@@ -1,37 +1,45 @@
 import { Link } from "react-router-dom";
-import SearchForm from "./SearchForm";
 import useOnline from "../hooks/useOnline";
+import logo from "../assets/cocktail-drink.svg";
+import SearchForm from "./SearchForm";
 
-const Header = () => {
+const Header = ({ handleSearchResults }) => {
   const isOnline = useOnline();
 
   return (
     <header className="header">
-      <img
-        className="logo"
-        src="https://www.pikpng.com/pngl/b/31-319914_cocktail-logo-png-cocktails-sign-png-clipart.png"
-        alt="Food Fire"
-        title="Food Fire"
-      />
+      <img className="logo" src={logo} alt="cocktail" title="cocktail" />
+      <h1 className="logo-title">Drink Haven</h1>
+      <SearchForm onSearch={handleSearchResults} />
 
-      <SearchForm />
-
-      <nav className="nav-items">
-        <ul>
-          <li>
-            <Link to="/about">About Us</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact Us</Link>
-          </li>
+      <nav>
+        <ul className="nav">
           <li>
             <span
-              className={isOnline ? "login-btn-green" : "login-btn-red"}
+              className={`login-status-dot ${
+                isOnline ? "login-btn-green" : "login-btn-red"
+              }`}
               title={isOnline ? "Online" : "Offline"}
-              style={{ fontSize: "1.5rem" }}
             >
               ●
             </span>
+
+            <span nav-link>{isOnline ? "Online" : "Offline"}</span>
+          </li>
+          <li>
+            <Link className="nav-link" to="/about">
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-link" to="/contact">
+              Contact Us
+            </Link>
+          </li>
+          <li>
+            <Link className="nav-link" to="/favoritelist">
+              FavoriteList
+            </Link>
           </li>
         </ul>
       </nav>

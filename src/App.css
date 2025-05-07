@@ -1,160 +1,314 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "PT Sans", Calibri, sans-serif;
-  overflow-x: hidden;
-}
 :root {
-  --header-bg-color: rgb(255, 255, 255);
-  --footer-bg-color: rgb(255, 255, 255);
-  --body-bg-color: linear-gradient(to right, #ff7e5f, #feb47b);
-  --input-bg: #f2f2f2;
-  --input-bg-focus: #dbdbdb;
-  --text-color: #000;
-  --light-text-color: #545454;
-  --light-text-title: #353535;
+  --hulu-green: #1ce783;
   --light-green: #00ad1d;
-  --dark-green: #016034;
-  --orange: #d97919;
-  --light-orange: #ffaf60;
-  --dark-orange: #c26100;
   --x-dark-orange: rgb(157, 42, 1);
-  --light-red: rgb(236, 56, 56);
-  --white: #fff;
-  --light-white-text: #eaeaea;
-  --light-black: rgb(23, 23, 23);
-  --light-blue: #0463ac;
-  --dark-blue: #070062;
+  --dark-bg: #040405;
+  --light-gray: #d3d3d3;
+  --white: #ffffff;
 }
-.app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 100vh;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+body {
   width: 100vw;
-  height: 80px;
-  background-color: var(--header-bg-color);
-  border-radius: 5px;
-  box-shadow: -2px 7px 5px -6px rgba(0, 0, 0, 0.61);
-  color: var(--light-text-color);
-  font-weight: bold;
+  min-height: 100vh;
+  background-color: var(--dark-bg);
+  color: var(--white);
+  font-family: "Quicksand";
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 70px;
+  background: var(--dark-bg);
+  color: var(--white);
   position: fixed;
   top: 0;
+  width: 98%;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
   left: 0;
-  z-index: 999;
-  overflow-y: hidden;
+  right: 0;
+  background-color: var(--dark-bg);
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  text-align: center;
 }
 
 .logo {
   padding: 10px 0 10px 15px;
   width: 90px;
 }
-.nav-items > ul {
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.nav li {
   list-style-type: none;
-  display: flex;
-  margin-right: 30px;
-  align-items: center;
-  justify-content: space-between;
+  text-decoration: none;
 }
 
-.nav-items > ul > li {
+.nav-link {
+  list-style-type: none;
+  text-decoration: none;
+  color: var(--light-gray);
+  text-decoration: none;
+  padding: 15px;
+  cursor: pointer;
+  font-family: "Quicksand";
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--hulu-green);
+}
+.nav li span {
+  color: var(--light-gray);
+
+  font-family: "Quicksand";
+}
+
+.search-input {
+  position: relative;
+  background-color: #0f0f11;
+  border: 2px solid transparent;
+  padding: 10px 15px;
+  outline: none;
+  border-radius: 4px;
+  color: var(--white);
+  font-size: 16px;
+  width: 400px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--hulu-green);
+  box-shadow: 0 0 0 2px rgba(28, 231, 131, 0.2);
+}
+
+::placeholder {
+  color: var(--light-gray);
+  font-family: "Quicksand";
+  font-size: 18px;
   padding: 10px;
 }
-.search-form {
-  background-color: var(--primary-color);
-  text-align: center;
+
+.search-icon {
+  position: absolute;
+  margin-left: -35px;
+  top: 38px;
+  cursor: pointer;
+}
+
+.favorite-cocktail-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 350px);
   justify-content: center;
-  display: flex;
+  grid-gap: 20px;
+  color: var(--light-gray);
+}
+
+.cocktail-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   padding: 20px;
-  margin: auto;
-  gap: 10px;
-  border-radius: 6px;
-  box-shadow: 2px 5px 0 rgba(0, 0, 0, 0.3);
+  margin-top: 100px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cocktail-search-results {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  margin-top: 100px;
   width: 100%;
-  justify-self: center;
-  align-self: center;
-  margin-top: 10px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.search-form input {
-  padding: 10px;
-  width: 50%;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.search-button {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--color-secondary);
-  border-radius: 5px;
-  color: #fff;
+.cocktail-card {
+  background-color: #0f0f11;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 35px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  color: var(--light-gray);
   cursor: pointer;
-  background: transparent;
-  transition: all 0.3s ease-in-out;
+  position: relative;
 }
 
-.search-button:hover {
-  background: var(--color-secondary);
-  color: #000;
+.cocktail-card:hover {
+  transform: scale(1.03);
 }
 
-.search-button:disabled {
-  border-color: #ccc;
-  cursor: not-allowed;
+.cocktail-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
-.search-button:disabled:hover {
-  background: transparent;
-  color: #fff;
+.cocktail-card-link {
+  list-style-type: none;
+  text-decoration: none;
 }
 
-h2 {
+.cocktail-poster {
+  width: 100%;
+  height: 300px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.add-to-watchlist {
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  border: var(--light-gray) solid 1px;
+  padding: 2px;
+
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.add-to-watchlist:hover {
+  border: var(--hulu-green) 1px solid;
+}
+
+.cocktail-title {
+  font-size: 18px;
+  margin-top: 25px;
+  color: var(--hulu-green);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.logo {
+  padding: 10px 0 10px 15px;
+  width: 90px;
+}
+
+.btn {
+  background-color: var(--hulu-green);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: "Quicksand";
+}
+
+button:hover {
+  background-color: darken(var(--hulu-green), 10%);
+}
+
+.remove-favoritelist {
+  width: 100%;
+  padding: 10px 0 !important;
+  background-color: var(--hulu-green);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: "Quicksand";
+}
+
+.watchlist-empty {
+  color: var(--light-gray);
+  text-align: center;
+  margin-top: 300px;
+}
+
+.footer {
+  background-color: var(--dark-bg);
+  color: var(--light-gray);
+  padding: 20px;
   text-align: center;
 }
-/* Card */
-.card {
-  width: 240px;
-  border-radius: 5px;
-  box-shadow: -1px 5px 10px 5px rgba(112, 112, 112, 0.2);
-  padding: 10px;
-  margin: 20px;
-  cursor: pointer;
-}
 
-.card img {
-  width: 100%;
+.footer a {
+  color: var(--hulu-green);
+  margin: 0 10px;
 }
-
-.card-body {
-  padding: 10px;
-  font-size: 20px;
-}
-
-.card:hover {
-  transform: scale(1.05);
-  transition: all 0.5s ease-in-out;
-  background: #0a4b8f;
-}
-
-.hide {
-  display: none !important;
-}
-.container {
-  width: auto;
+.cocktail-detail {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
   justify-content: center;
-  align-self: stretch;
-  margin-top: 80px;
+  flex-wrap: wrap;
+}
+
+.cocktail-img {
+  flex: 0 0 350px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+}
+
+.cocktail-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.cocktail-info-list,
+.ingredient {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.cocktail-info-list li,
+.ingredient li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.cocktail-info-list li img,
+.ingredient li img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+.login-btn-green {
+  color: var(--light-green);
+}
+
+.login-btn-red {
+  color: var(--x-dark-orange);
 }
 .about-container-main {
   min-height: 87vh;
@@ -297,30 +451,114 @@ h2 {
 .contact-container .contact-right form button:hover {
   background-color: var(--orange);
 }
-.cocktail-section {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-.drink-info {
-  padding: 0 20px;
+.nav li span.login-status-dot {
+  font-size: 1.5rem;
+  margin-right: 8px;
+  display: inline-block;
 }
 
-.drink {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 50px 0 30px;
+.login-btn-green {
+  color: var(--light-green) !important;
 }
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background-color: #333;
-  color: white;
-  margin-bottom: 0;
-  bottom: 0;
-  margin-top: auto;
+
+.login-btn-red {
+  color: var(--x-dark-orange) !important;
+}
+.user-offline-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.user-offline-heading {
+  color: #333333;
+  margin-top: 100px;
+}
+
+.offline-image {
+  width: 200px;
+  height: auto;
+  margin-top: 20px;
+}
+
+.user-offline-message {
+  color: #505050;
+  font-size: 18px;
+  margin: 20px 0px;
+}
+@media (max-width: 768px) {
+  .cocktail-detail {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cocktail-img {
+    margin: 0 auto;
+  }
+
+  .cocktail-text {
+    width: 100%;
+  }
+
+  .search-input,
+  nav .nav-link {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  }
+
+  .nav-link {
+    max-width: 300px !important;
+    margin-right: 10px;
+    padding: 0 !important;
+  }
+
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav {
+    margin-left: -50px;
+  }
+
+  .cocktail-image {
+    height: auto;
+  }
+  .cocktail-image {
+    width: 100%;
+    height: auto;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  .cocktail-title {
+    font-size: 16px;
+  }
+
+  .Toastify__toast-container .Toastify__toast {
+    min-height: 48px;
+    padding: 2px 8px;
+    max-width: 200px;
+  }
+
+  .search-input {
+    margin-top: 10px;
+    width: 300px;
+  }
+
+  .search-icon {
+    top: 100px;
+    margin-left: -40px;
+  }
+
+  .cocktail-cards {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    width: 95%;
+  }
 }
