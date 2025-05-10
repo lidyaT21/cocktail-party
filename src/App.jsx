@@ -61,7 +61,7 @@ const App = () => {
             <FavoriteList
               favoritelist={favoritelist}
               addToFavoriteList={addToFavoriteList}
-              onRemoveFavoriteList={removeFavoriteList}
+              onRemoveFromFavoriteList={removeFavoriteList}
             />
           }
         />

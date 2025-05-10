@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Card from "./Card";
 import Header from "./Header";
 import Footer from "./Footer";
 import Loading from "./Loading";
