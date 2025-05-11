@@ -60,7 +60,6 @@ const App = () => {
           element={
             <FavoriteList
               favoritelist={favoritelist}
-              addToFavoriteList={addToFavoriteList}
               onRemoveFromFavoriteList={removeFavoriteList}
             />
           }

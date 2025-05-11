@@ -14,7 +14,7 @@ const CardList = ({ addToFavoriteList }) => {
       try {
         const response = await fetch(`${url}A`);
         const data = await response.json();
-        setCocktails(data.drinks || []);
+        setCocktails(data.drinks);
       } catch (error) {
         console.error("Error fetching cocktails:", error);
         setCocktails([]);
@@ -27,10 +27,6 @@ const CardList = ({ addToFavoriteList }) => {
   }, []);
 
   if (loading) return <Loading />;
-
-  if (cocktails.length === 0) {
-    return <h2 className="section-title">No cocktails matched your search</h2>;
-  }
 
   return (
     <div className="cocktail-list">

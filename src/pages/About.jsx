@@ -1,4 +1,4 @@
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
   const navigate = useNavigate();
@@ -6,8 +6,6 @@ const About = () => {
   return (
     <div className="about-container-main">
       <div className="about-profile-container">
-        <Outlet />
-
         <button
           className="about-profile-button"
           onClick={() => navigate(-1)}
